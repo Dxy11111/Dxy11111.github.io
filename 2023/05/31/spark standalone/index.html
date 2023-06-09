@@ -96,58 +96,58 @@
                 
                 <section id="post-body">
                     <h1 id="Spark-Standalone"><a href="#Spark-Standalone" class="headerlink" title="Spark-Standalone"></a>Spark-Standalone</h1><h2 id="一-安装Anaconda"><a href="#一-安装Anaconda" class="headerlink" title="一.安装Anaconda"></a>一.安装Anaconda</h2><p>上传Anaconda3-2021.05-Linux-x86_64.sh文件到Linux服务器上</p>
-<p><img src="/../images/1.jpg" alt="图 1">  </p>
+<p><img src="/../image-standalone/1.jpg" alt="图 1">  </p>
 <p>安装</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh ./Anaconda3-2021.05-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-<p><img src="/../images/2.jpg" alt="图 2">  </p>
-<p><img src="/../images/3.jpg" alt="图 3"> </p>
-<p><img src="/../images/4.jpg" alt="图 4">  </p>
+<p><img src="/../image-standalone/2.jpg" alt="图 2">  </p>
+<p><img src="/../image-standalone/3.jpg" alt="图 3"> </p>
+<p><img src="/../image-standalone/4.jpg" alt="图 4">  </p>
 <p>重新进入到finalshell后查看</p>
-<p><img src="/../images/5.jpg" alt="图 5">  </p>
+<p><img src="/../image-standalone/5.jpg" alt="图 5">  </p>
 <p>此时base表示已经安装完成</p>
 <h2 id="二-所有机器配置环境变量"><a href="#二-所有机器配置环境变量" class="headerlink" title="二.所有机器配置环境变量"></a>二.所有机器配置环境变量</h2><p>上传spark.jar包并解压</p>
-<p><img src="/../images/6.jpg" alt="图 6">  </p>
-<p><img src="/../images/7.jpg" alt="图 7">  </p>
+<p><img src="/../image-standalone/6.jpg" alt="图 6">  </p>
+<p><img src="/../image-standalone/7.jpg" alt="图 7">  </p>
 <h3 id="配置环境文件"><a href="#配置环境文件" class="headerlink" title="配置环境文件"></a>配置环境文件</h3><h5 id="配置workers文件"><a href="#配置workers文件" class="headerlink" title="配置workers文件"></a>配置workers文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 改名，将workers.template改名成workers</span><br><span class="line"></span><br><span class="line"># 进入到workers里编辑文件</span><br></pre></td></tr></table></figure>
-<p><img src="/../images/9.jpg" alt="图 9">  </p>
-<p><img src="/../images/10.jpg" alt="图 10">  </p>
+<p><img src="/../image-standalone/9.jpg" alt="图 9">  </p>
+<p><img src="/../image-standalone/10.jpg" alt="图 10">  </p>
 <h5 id="配置spark-env-sh文件"><a href="#配置spark-env-sh文件" class="headerlink" title="配置spark-env.sh文件"></a>配置spark-env.sh文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"># 1.改名，将spark-env.sh.template改名成为将spark-env.sh</span><br><span class="line"></span><br><span class="line"># 2.编辑saprk-env.sh,添加以下内容</span><br><span class="line"></span><br><span class="line">## 设置JAVA安装目录</span><br><span class="line">JAVA_HOME=/export/server/jdk</span><br><span class="line"></span><br><span class="line">## HADOOP软件配置文件目录，读取HDFS上文件和运行YARN集群</span><br><span class="line">HADOOP_CONF_DIR=/export/server/hadoop/etc/hadoop</span><br><span class="line">YARN_CONF_DIR=/export/server/hadoop/etc/hadoop</span><br><span class="line"></span><br><span class="line">## 指定spark老大Master的IP和提交任务的通信端口</span><br><span class="line"># 告知Spark的master运行在哪个机器上</span><br><span class="line">export SPARK_MASTER_HOST=node1</span><br><span class="line"># 告知sparkmaster的通讯端口</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line"># 告知spark master的 webui端口</span><br><span class="line">SPARK_MASTER_WEBUI_PORT=8080</span><br><span class="line"></span><br><span class="line"># worker cpu可用核数</span><br><span class="line">SPARK_WORKER_CORES=1</span><br><span class="line"># worker可用内存</span><br><span class="line">SPARK_WORKER_MEMORY=1g</span><br><span class="line"># worker的工作通讯地址</span><br><span class="line">SPARK_WORKER_PORT=7078</span><br><span class="line"># worker的 webui地址</span><br><span class="line">SPARK_WORKER_WEBUI_PORT=8081</span><br><span class="line"></span><br><span class="line">## 设置历史服务器</span><br><span class="line"># 配置的意思是  将spark程序运行的历史日志 存到hdfs的/sparklog文件夹中</span><br><span class="line">SPARK_HISTORY_OPTS=&quot;-Dspark.history.fs.logDirectory=hdfs://node1:8020/sparklog/ -Dspark.history.fs.cleaner.enabled=true&quot;</span><br></pre></td></tr></table></figure>
-<p><img src="/../images/11.jpg" alt="图 11">  </p>
-<p><img src="/../images/12.jpg" alt="图 12">  </p>
+<p><img src="/../image-standalone/11.jpg" alt="图 11">  </p>
+<p><img src="/../image-standalone/12.jpg" alt="图 12">  </p>
 <h5 id="在HDFS上传件运行历史存放的文件夹"><a href="#在HDFS上传件运行历史存放的文件夹" class="headerlink" title="在HDFS上传件运行历史存放的文件夹"></a>在HDFS上传件运行历史存放的文件夹</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -mkdir /sparklog</span><br><span class="line">hadoop fs -chmod 777 /sparklog</span><br></pre></td></tr></table></figure>
-<p><img src="/../images/13.jpg" alt="图 13">  </p>
+<p><img src="/../image-standalone/13.jpg" alt="图 13">  </p>
 <h5 id="配置spark-defaults-conf文件"><a href="#配置spark-defaults-conf文件" class="headerlink" title="配置spark-defaults.conf文件"></a>配置spark-defaults.conf文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 1. 改名</span><br><span class="line">mv spark-defaults.conf.template spark-defaults.conf</span><br><span class="line"></span><br><span class="line"># 2. 修改内容, 添加下内容</span><br><span class="line"></span><br><span class="line"># 开启spark的日期记录功能</span><br><span class="line">spark.eventLog.enabled 	true</span><br><span class="line"># 设置spark日志记录的路径</span><br><span class="line">spark.eventLog.dir	 hdfs://node1:8020/sparklog/ </span><br><span class="line"># 设置spark日志是否启动压缩</span><br><span class="line">spark.eventLog.compress 	true</span><br></pre></td></tr></table></figure>
-<p><img src="/../images/14.jpg" alt="图 14">  </p>
-<p><img src="/../images/15.jpg" alt="图 15">  </p>
+<p><img src="/../image-standalone/14.jpg" alt="图 14">  </p>
+<p><img src="/../image-standalone/15.jpg" alt="图 15">  </p>
 <h5 id="配置log4j-properties-文件"><a href="#配置log4j-properties-文件" class="headerlink" title="配置log4j.properties 文件"></a>配置log4j.properties 文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 1. 改名</span><br><span class="line">mv log4j.properties.template log4j.properties</span><br><span class="line"></span><br><span class="line"># 2.编辑log4j.properties，</span><br><span class="line">修改内容如下图所示</span><br></pre></td></tr></table></figure>
-<p><img src="/../images/16.jpg" alt="图 16">  </p>
-<p><img src="/../images/17.jpg" alt="图 17">  </p>
+<p><img src="/../image-standalone/16.jpg" alt="图 16">  </p>
+<p><img src="/../image-standalone/17.jpg" alt="图 17">  </p>
 <h3 id="将spark安装文件分发到node2，node3上"><a href="#将spark安装文件分发到node2，node3上" class="headerlink" title="将spark安装文件分发到node2，node3上"></a>将spark安装文件分发到node2，node3上</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r spark-3.1.2-bin-hadoop3.2 node2:/export/server/</span><br><span class="line">scp -r spark-3.1.2-bin-hadoop3.2 node3:/export/server/</span><br></pre></td></tr></table></figure>
-<p>node2<br><img src="/../images/18.jpg" alt="图 18">  </p>
-<p>node3<br><img src="/../images/19.jpg" alt="图 19">  </p>
+<p>node2<br><img src="/../image-standalone/18.jpg" alt="图 18">  </p>
+<p>node3<br><img src="/../image-standalone/19.jpg" alt="图 19">  </p>
 <p>同时，在node2和node3上给spark安装目录添加软连接</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /export/server/spark-3.1.2-bin-hadoop3.2 /export/server/spark</span><br></pre></td></tr></table></figure>
-<p>node2<br><img src="/../images/20.jpg" alt="图 20">  </p>
-<p>node3<br><img src="/../images/21.jpg" alt="图 21">  </p>
+<p>node2<br><img src="/../image-standalone/20.jpg" alt="图 20">  </p>
+<p>node3<br><img src="/../image-standalone/21.jpg" alt="图 21">  </p>
 <h3 id="检查环境变量"><a href="#检查环境变量" class="headerlink" title="检查环境变量"></a>检查环境变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">进入到profile里</span><br><span class="line">检查</span><br><span class="line">JAVA_HOME</span><br><span class="line">SPARK_HOME</span><br><span class="line">PYSPARK_PYTHON</span><br><span class="line">等环境变量是否正确指向正确的目录</span><br></pre></td></tr></table></figure>
-<p><img src="/../images/22.jpg" alt="图 22">  </p>
-<p><img src="/../images/23.jpg" alt="图 23">  </p>
-<p><img src="/../images/24.jpg" alt="图 24">  </p>
+<p><img src="/../image-standalone/22.jpg" alt="图 22">  </p>
+<p><img src="/../image-standalone/23.jpg" alt="图 23">  </p>
+<p><img src="/../image-standalone/24.jpg" alt="图 24">  </p>
 <h3 id="启动历史服务器"><a href="#启动历史服务器" class="headerlink" title="启动历史服务器"></a>启动历史服务器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/start-history-server.sh</span><br></pre></td></tr></table></figure>
-<p><img src="/../images/25.jpg" alt="图 25">  </p>
-<h3 id="启动Spark的Master和Worker进程"><a href="#启动Spark的Master和Worker进程" class="headerlink" title="启动Spark的Master和Worker进程"></a>启动Spark的Master和Worker进程</h3><p><img src="/../images/26.jpg" alt="图 26">  </p>
+<p><img src="/../image-standalone/25.jpg" alt="图 25">  </p>
+<h3 id="启动Spark的Master和Worker进程"><a href="#启动Spark的Master和Worker进程" class="headerlink" title="启动Spark的Master和Worker进程"></a>启动Spark的Master和Worker进程</h3><p><img src="/../image-standalone/26.jpg" alt="图 26">  </p>
 <h3 id="查看Master的WEB-UI"><a href="#查看Master的WEB-UI" class="headerlink" title="查看Master的WEB UI"></a>查看Master的WEB UI</h3><p>默认窗口设置的是8080</p>
-<p><img src="/../images/28.jpg" alt="图 28">  </p>
+<p><img src="/../image-standalone/28.jpg" alt="图 28">  </p>
 <h2 id="连接到Standalone集群"><a href="#连接到Standalone集群" class="headerlink" title="连接到Standalone集群"></a>连接到Standalone集群</h2><h5 id="bin-x2F-pyspark"><a href="#bin-x2F-pyspark" class="headerlink" title="bin&#x2F;pyspark"></a>bin&#x2F;pyspark</h5><p>执行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/pyspark --master spark://node1:7077</span><br></pre></td></tr></table></figure>
-<p><img src="/../images/29.jpg" alt="图 29">  </p>
+<p><img src="/../image-standalone/29.jpg" alt="图 29">  </p>
 <h5 id="bin-x2F-spark-shell"><a href="#bin-x2F-spark-shell" class="headerlink" title="bin&#x2F;spark-shell"></a>bin&#x2F;spark-shell</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-shell --master spark://node1:7077</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//测试代码</span><br><span class="line">sc.parallelize(Array(1,2,3,4,5)).map(x=&gt; x + 1).collect()</span><br></pre></td></tr></table></figure>
-<p><img src="/../images/30.jpg" alt="图 30">  </p>
+<p><img src="/../image-standalone/30.jpg" alt="图 30">  </p>
 <h5 id="bin-x2F-spark-submit-PI"><a href="#bin-x2F-spark-submit-PI" class="headerlink" title="bin&#x2F;spark-submit(PI)"></a>bin&#x2F;spark-submit(PI)</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit --master spark://node1:7077 /export/server/spark/examples/src/main/python/pi.py 100</span><br></pre></td></tr></table></figure>
-<p><img src="/../images/31.jpg" alt="图 31">  </p>
+<p><img src="/../image-standalone/31.jpg" alt="图 31">  </p>
 <h3 id="查看历史服务器"><a href="#查看历史服务器" class="headerlink" title="查看历史服务器"></a>查看历史服务器</h3><p>历史服务器的默认端口是: 18080</p>
-<p><img src="/../images/32.jpg" alt="图 32">  </p>
+<p><img src="/../image-standalone/32.jpg" alt="图 32">  </p>
 <h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">这个spark-standalone部署的任务总体来说还是很简单的，</span><br><span class="line">从头到尾基本没有遇到什么问题，基本上很顺利的就结束了这个任务点。</span><br><span class="line">也就在连接到standalone集群时出现了拒绝连接的情况，</span><br><span class="line">结果发现是hdf集群和yarn集群没有启动，除此之外就没有什么问题了</span><br></pre></td></tr></table></figure>
                 </section>
 
